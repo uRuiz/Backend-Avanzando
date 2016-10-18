@@ -1,3 +1,5 @@
+
+
 def get_followers(user):
     followers = list()
     for relationship in user.relationship_target.select_related('origin'):

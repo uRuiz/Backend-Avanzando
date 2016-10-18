@@ -87,3 +87,11 @@ ENV/
 
 # Rope project settings
 .ropeproject
+.idea/instageek.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+instageek/views.py
+locale/
+templates/
+*.xml

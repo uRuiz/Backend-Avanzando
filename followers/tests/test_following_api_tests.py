@@ -6,7 +6,6 @@ from rest_framework import status
 from followers.models import Relationship
 
 
-
 @override_settings(ROOT_URLCONF='followers.urls')
 class FollowingAPITests(APITestCase):
 
