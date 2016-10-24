@@ -95,3 +95,7 @@ instageek/views.py
 locale/
 templates/
 *.xml
+
+
+# Uploads
+uploads/
