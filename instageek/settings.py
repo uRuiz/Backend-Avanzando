@@ -40,6 +40,14 @@ INSTALLED_APPS = [
     'followers',
     'posts',
     'easy_thumbnails',
+    'kombu.transport.django',  # para que funcione como broker/cola de tareas
+    'rest_framework.authtoken',  # contiene los modelos y clases para generar los API key
+    'rest_auth',
+    'allauth',
+    'allauth.account',
+    'rest_auth.registration',
+    'django.contrib.sites',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -133,9 +141,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
 MEDIA_URL = '/media/'
 
 # Image sizes
-DEFAULT_IMAGE_SIZE = (1200, 1200)
+DEFAULT_IMAGE_SIZE = (2500, 2500)
 
 THUMBNAIL_HIGH_RESOLUTION = False
+
+THUMBNAIL_NAMER = 'easy_thumbnails.namers.alias'
+
 THUMBNAIL_ALIASES = {
     '': {
         'small': {'size': (500, 500), 'crop': True},
@@ -143,3 +154,23 @@ THUMBNAIL_ALIASES = {
         'large': {'size': (1000, 1000), 'crop': True},
     },
 }
+
+# Celery settings
+BROKER_URL = 'django://'  # le dice a Celery que se tiene que coenctar a Kombu
+
+# Rest Framework settings
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',  # poder autenticarnos por API key
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',  # poder autenticarnos por JWT
+    )
+}
+
+# Sites
+SITE_ID = 1
+
+# No enviar e-mail de verificaciónd e cuenta
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+REST_USE_JWT = True  # Al hacer login nos devuelva el token JWT

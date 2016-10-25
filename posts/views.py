@@ -14,8 +14,8 @@ class PostViewSet(ModelViewSet):
 
     def perform_create(self, serializer):
         post = serializer.save(owner=self.request.user)
-        generate_responsive_images(post)
+        generate_responsive_images.delay(post)  # manda la tarea de 'generate_responsive_images' a la cola
 
     def perform_update(self, serializer):
         post = serializer.save(owner=self.request.user)
-        generate_responsive_images(post)
+        generate_responsive_images.delay(post)  # manda la tarea de 'generate_responsive_images' a la cola

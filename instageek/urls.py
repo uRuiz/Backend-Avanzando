@@ -17,6 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from django.conf.urls.static import static
 from django.conf import settings
+from rest_framework.authtoken.views import obtain_auth_token
 
 from instageek.views import hello
 
@@ -25,5 +26,8 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/', include('followers.urls')),
     url(r'^api/', include('posts.urls')),
+    url(r'^api/obtain-token/', obtain_auth_token),
+    url(r'^api/rest-auth/', include('rest_auth.urls')),
+    url(r'^api/rest-auth/registration/', include('rest_auth.registration.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
